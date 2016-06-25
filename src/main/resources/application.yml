@@ -1,0 +1,7 @@
+# src/main/resources/application.yml
+spring:
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:file:memo.datastore
+    username: sa
+    password:
