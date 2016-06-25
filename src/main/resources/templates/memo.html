@@ -1,0 +1,39 @@
+<!-- src/main/resources/templates/memo.html -->
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Memo</title>
+    <style>
+        body,
+        input,
+        button {
+            color: #333;
+        }
+        input,
+        button {
+            font-size: 1rem;
+            margin: .5rem 0 .5rem .5rem;
+            height: 2rem;
+        }
+        button {
+            border: #333 solid 1px;
+            background: #eee;
+            padding: .25rem .75rem .25rem .75rem;
+        }
+    </style>
+</head>
+<body>
+<form action="/memo" method="post">
+    <div>
+        <input name="memo" placeholder="memo"/>
+        <input name="author" placeholder="author"/>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+<ul>
+    <li th:each="item : ${items}" 
+        th:text="${item.memo} + ${#strings.isEmpty(item.author) ? '' : ' @' + item.author}">memo text</li>
+</ul>
+</body>
+</html>
