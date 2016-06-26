@@ -8,4 +8,7 @@ import org.aspectj.lang.annotation.Pointcut;
 public class RepositoryPointcut {
     @Pointcut("execution(* io.github.yo1000.sss.repository..MemoRepository+.save(..))")
     public void save() {}
+
+    @Pointcut("execution(* io.github.yo1000.sss.repository..MemoRepository+.findByAuthor(..)) && args(author)")
+    public void findByAuthor(String author) {}
 }
