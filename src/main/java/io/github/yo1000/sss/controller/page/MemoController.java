@@ -1,6 +1,7 @@
 // src/main/java/io/github/yo1000/sss/controller/page/MemoController.java
 package io.github.yo1000.sss.controller.page;
 
+import io.github.yo1000.sss.aspect.ExceptionControllerAdvice;
 import io.github.yo1000.sss.model.Memo;
 import io.github.yo1000.sss.service.MemoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,11 @@ public class MemoController {
                        Model model) {
         getMemoService().write(item.getMemo(), item.getAuthor());
         return "redirect:/memo";
+    }
+
+    @RequestMapping("error")
+    public String getError(Model model) {
+        throw new ExceptionControllerAdvice.MemoException();
     }
 
     public MemoService getMemoService() {
