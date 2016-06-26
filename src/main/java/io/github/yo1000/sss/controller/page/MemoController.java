@@ -23,10 +23,14 @@ public class MemoController {
 
     @RequestMapping("")
     public String get(Model model) {
-        List<Memo> items = new ArrayList<>();
-        items.add(getMemoService().join("Join Memo", "Join Author"));
+        model.addAttribute("items", getMemoService().readAll());
+        return "memo";
+    }
 
-        model.addAttribute("items", items);
+    @RequestMapping("{author}")
+    public String get(@PathVariable String author,
+                      Model model) {
+        model.addAttribute("items", getMemoService().readByAuthor(author));
         return "memo";
     }
 
@@ -44,11 +48,8 @@ public class MemoController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String post(@ModelAttribute Memo item,
                        Model model) {
-        List<Memo> items = new ArrayList<>();
-        items.add(item);
-
-        model.addAttribute("items", items);
-        return "memo";
+        getMemoService().write(item.getMemo(), item.getAuthor());
+        return "redirect:/memo";
     }
 
     public MemoService getMemoService() {
